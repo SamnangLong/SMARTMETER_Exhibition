@@ -1,0 +1,206 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Meter and Monitoring System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="KINTEK.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@100;300;400;700;900&family=Bokor&family=Moul&display=swap" rel="stylesheet">
+    <script src="js/test.js"></script>
+</head>
+<body> 
+  <div class="Hold_contain">
+    <div class="top_bar">
+       <img src="KINTEK.jpg" alt="KINTEK LOGO">
+        <h1 id="title">កុងទ័រឆ្លាតវៃ</h1> 
+        <div class="connect">
+            <label id="label_clientID">ឈ្មោះអ្នកប្រើប្រាស់:</label>
+            <div class="button">
+            <input type="text" id="box_clientID" placeholder="HOME" >
+            <button id="btn_connect" disabled onclick="BtnConnect()">Connect</button>
+          </div>
+        </div>
+    </div>
+    
+    <div class="contain">
+        <div class="data">
+            <h2>ការប្រើប្រាស់សរុប</h2>
+            <hr style="width: 90%; position:absolute; top: 55px; left: 62px; "/>
+            <div class="total_consumsion">
+                <div class="total_energy">
+                    <label id="label_energy">ថាមពលអគ្គិសនីសរុប:</label><br><br>
+                    <input type="text" id="box_energy" placeholder="100" style="background-color: #bfd4ee;" style="background-color: #bfd4ee;" >
+                    <label id="label_energy_unit">គីឡូវ៉ាត់ម៉ោង</label>
+                </div>
+                <div class="total_water">
+                    <label id="label_water">បរិមាណទឹកសរុប:</label><br><br>
+                    <input type="text" id="box_water" placeholder="100" style="background-color: #bfd4ee;">
+                    <label id="label_water_unit">ម៉ែត្រគីប</label>
+                </div>
+            </div>
+        </div>
+        <div class="custom">
+            <div class="custom1">
+              <div class="datacon_c1" >
+                <span class="cus_name">អតិថិជនទី 1</span>
+                <span class="cus_Id">ID: 000001</span>
+                <hr style="width: 393px; position:absolute;  "/>
+                <h3 id="cus_energy"><b>ទិន្ន័យ:</b></h3>
+                
+
+                <label id="cus_power">ថាមពល:</label>
+                <input type="text" id="box_cus_energy1" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">គីឡូវ៉ាត់ម៉ោង</label><br><br>
+
+                <label id="cus_voltage">តង់ស្យុង:</label>
+                <input type="text" id="box_cus_voltage1" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">វ៉ុល</label><br><br>
+
+                <label id="cus_current">ចរន្ត:</label>
+                <input type="text" id="box_cus_current1" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">អំពែ</label><br><br>
+
+                <label id="cus_usage">បរិមាណទឹក:</label>
+                <input type="text" id="box_cus_usage1" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">ម៉ែត្រគីប</label>
+              </div>
+
+              <div class="btn_c1_E" >
+                <label class="switch-button" for="switch1" style="margin-left: 5px;">ឌីសង់ទ័រភ្លើង:
+                    <div class="switch-outer">
+                      <input id="switch1" type="checkbox" >
+                      <div class="button">
+                        <span class="button-toggle"></span>
+                        <span class="button-indicator"></span>
+                      </div>
+                    </div>
+                  </label>
+              </div>
+ 
+              <div class="btn_c1_W">
+                  <label class="switch-button" for="switch2">វ៉ានទឹក:
+                    <div class="switch-outer">
+                      <input id="switch2" type="checkbox">
+                      <div class="button">
+                        <span class="button-toggle"></span>
+                        <span class="button-indicator"></span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+            </div>
+
+            <div class="custom2">
+              <div class="datacon_c2" >
+                <span class="cus_name">អតិថិជនទី 2</span>
+                <span class="cus_Id">ID: 000002</span>
+                <hr style="width: 393px; position:absolute;  "/>
+                <h3 id="cus_energy"><b>ទិន្ន័យ:</b></h3>
+                
+
+                <label id="cus_power">ថាមពល:</label>
+                <input type="text" id="box_cus_energy2" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">គីឡូវ៉ាត់ម៉ោង</label><br><br>
+
+                <label id="cus_voltage">តង់ស្យុង:</label>
+                <input type="text" id="box_cus_voltage2" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">វ៉ុល</label><br><br>
+
+                <label id="cus_current">ចរន្ត:</label>
+                <input type="text" id="box_cus_current2" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">អំពែ</label><br><br>
+
+                <label id="cus_usage">បរិមាណទឹក:</label>
+                <input type="text" id="box_cus_usage2" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">ម៉ែត្រគីប</label>
+              </div>
+
+              <div class="btn_c2_E" >
+                <label class="switch-button" for="switch3" >ឌីសង់ទ័រភ្លើង:
+                    <div class="switch-outer">
+                      <input id="switch3" type="checkbox" >
+                      <div class="button">
+                        <span class="button-toggle"></span>
+                        <span class="button-indicator"></span>
+                      </div>
+                    </div>
+                  </label>
+              </div>
+ 
+              <div class="btn_c2_W">
+                  <label class="switch-button" for="switch4">វ៉ានទឹក:
+                    <div class="switch-outer">
+                      <input id="switch4" type="checkbox">
+                      <div class="button">
+                        <span class="button-toggle"></span>
+                        <span class="button-indicator"></span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+            </div>
+
+            <div class="custom3">
+              <div class="datacon_c3" >
+                <span class="cus_name">អតិថិជនទី 3</span>
+                <span class="cus_Id">ID: 000003</span>
+                <hr style="width: 393px; position:absolute;  "/>
+                <h3 id="cus_energy"><b>ទិន្ន័យ:</b></h3>
+                
+
+                <label id="cus_power">ថាមពល:</label>
+                <input type="text" id="box_cus_energy3" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">គីឡូវ៉ាត់ម៉ោង</label><br><br>
+
+                <label id="cus_voltage">តង់ស្យុង:</label>
+                <input type="text" id="box_cus_voltage3" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">វ៉ុល</label><br><br>
+
+                <label id="cus_current">ចរន្ត:</label>
+                <input type="text" id="box_cus_current3" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">អំពែ</label><br><br>
+
+                <label id="cus_usage">បរិមាណទឹក:</label>
+                <input type="text" id="box_cus_usage3" placeholder="100" style="background-color: #bfd4ee;">
+                <label id="cus_unit">ម៉ែត្រគីប</label>
+              </div>
+
+              <div class="btn_c3_E" >
+                <label class="switch-button" for="switch5" >ឌីសង់ទ័រភ្លើង:
+                    <div class="switch-outer">
+                      <input id="switch5" type="checkbox" >
+                      <div class="button">
+                        <span class="button-toggle"></span>
+                        <span class="button-indicator"></span>
+                      </div>
+                    </div>
+                  </label>
+              </div>
+ 
+              <div class="btn_c3_W">
+                  <label class="switch-button" for="switch6">វ៉ានទឹក:
+                    <div class="switch-outer">
+                      <input id="switch6" type="checkbox">
+                      <div class="button">
+                        <span class="button-toggle"></span>
+                        <span class="button-indicator"></span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+            </div>   
+        </div>
+    </div>
+    <div class="bottom_bar" >
+      <h2>POWER BY: KINTEK TECHNOLOGY CO.,Ltd </h2>
+    </div>
+  </div>
+
+    <script src="js/event.js"></script>
+
+          
+</body>
+</html>
